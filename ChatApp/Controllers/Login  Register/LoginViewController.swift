@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LoginViewController: UIViewController {
     
@@ -24,7 +25,7 @@ class LoginViewController: UIViewController {
     
     private let emailField:UITextField = {
        let emailField = UITextField()
-        emailField.placeholder = "  Enter Your Email"
+        emailField.placeholder = "Enter Your Email"
         emailField.autocapitalizationType = .none
         emailField.autocorrectionType = .no
         emailField.returnKeyType = .continue
@@ -39,7 +40,7 @@ class LoginViewController: UIViewController {
     
     private let password:UITextField = {
         let password = UITextField()
-        password.placeholder = "  Enter Your Password"
+        password.placeholder = "Enter Your Password"
         password.autocapitalizationType = .none
         password.autocorrectionType = .no
         password.returnKeyType = .done
@@ -91,7 +92,7 @@ class LoginViewController: UIViewController {
         
         scrollView.frame = view.bounds
         let size = scrollView.width/1.5
-        imageView.frame = CGRect(x: (scrollView.width-size)/2, y: 20, width: size, height: size)
+        imageView.frame = CGRect(x: (scrollView.width-size)/2, y: 0, width: size, height: size)
         emailField.frame = CGRect(x: 20, y: Int(imageView.bottom) + 20, width: Int(scrollView.width) - 40, height: 52)
         password.frame = CGRect(x: 20, y: emailField.bottom + 20, width: scrollView.width - 40, height: 52)
         logginButton.frame = CGRect(x: 50, y: Int(password.bottom) + 40, width: Int(scrollView.width) - 100, height: 52)
@@ -110,13 +111,23 @@ class LoginViewController: UIViewController {
         emailField.resignFirstResponder()
         password.resignFirstResponder()
         guard let email = emailField.text, let password = password.text, !email.isEmpty, !password.isEmpty, password.count >= 6,email.contains("@") else {
-            alertUserLogInError()
+            alertUserLogInError(message: "Please enter correct data")
             return
         }
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            guard let self = self else {return}
+            guard let _ = authResult, error == nil else {
+                self.alertUserLogInError(message: "Wrong Email or Password, Please try again.")
+                return
+            }
+            self.navigationController?.dismiss(animated: true)
+        }
+        
+        
     }
     
-    func alertUserLogInError(){
-        let alert = UIAlertController(title: "Error", message: "Please make sure that your email and password are correct", preferredStyle: .alert)
+    func alertUserLogInError(message:String){
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
         
         present(alert,animated: true)
