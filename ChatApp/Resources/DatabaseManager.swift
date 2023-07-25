@@ -18,20 +18,20 @@ final class DatabaseManager{
 // MARK: - Account management
 extension DatabaseManager{
     
-    /*public func ifUserEmailExists(with email:String,completion: @escaping((Bool)->Void)){
+    public func ifUserEmailExists(with email:String,completion: @escaping((Bool)->Void)){
         var safeEmail = email.replacingOccurrences(of: ".", with: "-")
         safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
         
         database.child(safeEmail).observeSingleEvent(of: .value) { snapShot in
-            print(safeEmail)
-            print(snapShot.value as? String)
-            guard snapShot.value as? String != nil else {
+            //print(safeEmail)
+            //print(snapShot.value as? String)
+            guard snapShot.value as? String != email else {
                 completion(false)
                 return
             }
             completion(true)
         }
-    }*/
+    }
     
     
     

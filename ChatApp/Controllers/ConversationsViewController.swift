@@ -9,6 +9,8 @@ import UIKit
 import FirebaseAuth
 
 class ConversationsViewController: UIViewController {
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +30,7 @@ class ConversationsViewController: UIViewController {
     
     
     private func setupUI(){
-        view.backgroundColor = .red
-        
+        view.backgroundColor = .systemBackground
     }
     
     private func validateAuth(){

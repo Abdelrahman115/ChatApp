@@ -23,7 +23,7 @@ class RegisterViewController: UIViewController {
     
     private let imageView:UIImageView = {
        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "person.circle")
+        imageView.image = UIImage(systemName: "camera.circle")
         imageView.tintColor = .gray
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -207,14 +207,25 @@ class RegisterViewController: UIViewController {
             return
         }
  
-        
-        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
-            guard let _ = authResult,  error == nil else {
-                self?.alertUserLogInError(message: "This email is already exists")
+        DatabaseManager.shared.ifUserEmailExists(with: email) { exist in
+            guard !exist else {self.alertUserLogInError(message: "This email is already exists")
                 return
             }
-            DatabaseManager.shared.insertUser(with: chatAppUser(firstName: firstName, lastName: lastName, emailAddress: email))
-            self?.navigationController?.dismiss(animated: true)
+        
+        
+        FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
+            
+                
+                guard let _ = authResult,  error == nil else {
+                    //self?.alertUserLogInError(message: "This email is already exists")
+                    return
+                }
+               
+                
+                
+                DatabaseManager.shared.insertUser(with: chatAppUser(firstName: firstName, lastName: lastName, emailAddress: email))
+                self?.navigationController?.dismiss(animated: true)
+            }
         }
     }
     
