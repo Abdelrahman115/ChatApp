@@ -22,15 +22,30 @@ extension DatabaseManager{
         var safeEmail = email.replacingOccurrences(of: ".", with: "-")
         safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
         
-        database.child(safeEmail).observeSingleEvent(of: .value) { snapShot in
-            //print(safeEmail)
-            //print(snapShot.value as? String)
-            guard snapShot.value as? String != email else {
+        /*database.child(safeEmail).observeSingleEvent(of: .value) { snapShot in
+            print(safeEmail)
+            print(snapShot.value)
+            guard snapShot.value as? String != nil else {
                 completion(false)
                 return
             }
             completion(true)
-        }
+        }*/
+        let databaseReff = Database.database().reference().child("users")
+
+                            databaseReff.queryOrdered(byChild: "email").queryEqual(toValue: safeEmail).observe(.value, with: { snapshot in
+                                if snapshot.exists(){
+
+                                   //User email exist
+                                    print(snapshot)
+                                    print(snapshot.exists())
+                                }
+                                else{
+                                    //email does not [email id available]
+                                    print(snapshot)
+                                }
+
+                            })
     }
     
     
