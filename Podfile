@@ -14,6 +14,9 @@ pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'GoogleSignIn'
+pod 'MessageKit'
+pod 'JGProgressHUD'
+pod 'SDWebImage'
 
 
 pod 'FBSDKLoginKit'

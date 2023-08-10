@@ -7,10 +7,12 @@
 
 import UIKit
 import FirebaseAuth
+import JGProgressHUD
 
 class RegisterViewController: UIViewController {
     
     private var viewModel: RegisterViewModel!
+    private let spinner = JGProgressHUD(style: .light)
     
     // MARK: - UI elements
     private let scrollView:UIScrollView = {
@@ -128,7 +130,7 @@ class RegisterViewController: UIViewController {
         setupViewModel()
     }
     
-    // MARK: - Setup UI
+    // MARK: - Setup viewModel
     
     
     private func setupViewModel() {
@@ -136,25 +138,26 @@ class RegisterViewController: UIViewController {
             viewModel.delegate = self
         }
     
+    // MARK: - Setup UI
     
     private func setupUI(){
-        ///View properties
+        //View properties
         view.backgroundColor = .systemBackground
         title = "Register"
         
-        ///Add subviews
+        //Add subviews
         addSubviews()
         
-        ///change profile picture
+        //change profile picture
         imageView.isUserInteractionEnabled = true
         scrollView.isUserInteractionEnabled = true
         let geasture = UITapGestureRecognizer(target: self, action: #selector(didTapChangeProfilePic))
         imageView.addGestureRecognizer(geasture)
         
-        ///Register Button
+        //Register Button target
         registerButton.addTarget(self, action: #selector(didTapRegister), for: .touchUpInside)
         
-        ///TextFields delegates
+        //TextFields delegates
         firstNameField.delegate = self
         lastNameField.delegate = self
         emailField.delegate = self
@@ -178,24 +181,25 @@ class RegisterViewController: UIViewController {
     }
     
     private func addFrames(){
-        ///scroll view frame and size
+        //scroll view frame and size
         scrollView.frame = view.bounds
         
-        ///subViews frame
+        //subViews frame
         let size = scrollView.width/2
-        imageView.frame = CGRect(x: (scrollView.width-size)/2, y: 0, width: size, height: size)
+        imageView.frame = CGRect(x: (scrollView.width-size)/2, y: 30, width: size, height: size)
         imageView.layer.cornerRadius = size/2
         firstNameField.frame = CGRect(x: 20, y: Int(imageView.bottom) + 50, width: Int(scrollView.width) - 40, height: 50)
         lastNameField.frame = CGRect(x: 20, y: Int(firstNameField.bottom) + 10, width: Int(scrollView.width) - 40, height: 50)
         emailField.frame = CGRect(x: 20, y: Int(lastNameField.bottom) + 10, width: Int(scrollView.width) - 40, height: 50)
         password.frame = CGRect(x: 20, y: emailField.bottom + 10, width: scrollView.width - 40, height: 50)
         passwordConfirm.frame = CGRect(x: 20, y: password.bottom + 10, width: scrollView.width - 40, height: 50)
-        registerButton.frame = CGRect(x: 20, y: Int(passwordConfirm.bottom) + 30, width: Int(scrollView.width) - 40, height: 45)
+        registerButton.frame = CGRect(x: 20, y: Int(passwordConfirm.bottom) + 50, width: Int(scrollView.width) - 40, height: 45)
         
-        let scrollViewHeight = imageView.height + emailField.height + password.height + firstNameField.height + lastNameField.height + passwordConfirm.height + registerButton.height + 100
+        let scrollViewHeight = imageView.height + emailField.height + password.height + firstNameField.height + lastNameField.height + passwordConfirm.height + registerButton.height + 200
+        
+        print(scrollViewHeight)
         scrollView.contentSize = CGSize(width: view.width, height: scrollViewHeight)
     }
-    
     
     // MARK: - Target functions
     @objc private func didTapRegister(){
@@ -205,39 +209,42 @@ class RegisterViewController: UIViewController {
               let lastName = lastNameField.text,
               let email = emailField.text,
               let password = password.text,
-              let passwordConfirm = passwordConfirm.text
-              /*!firstName.isEmpty,
+              let passwordConfirm = passwordConfirm.text,
+              !firstName.isEmpty,
               !lastName.isEmpty ,
               !email.isEmpty,
-              !password.isEmpty,
-              password.count >= 6,
-              !passwordConfirm.isEmpty,
-              passwordConfirm.count >= 6,
-              //email.contains("@"),
-              password == passwordConfirm*/ else {
-            //alertUserLogInError(message: "Please fill all data")
+              !password.isEmpty
+            else {
+            alertUserLogInError(message: "Please fill all data")
             return
         }
-        viewModel.registerUser(firstName: firstName, lastName: lastName, email: email, password: password)
+        guard passwordConfirm == password else {
+            alertUserLogInError(message: "Please enter your password again in password confirm field.")
+            return
+        }
+        spinner.show(in: view)
+        viewModel.registerUser(firstName: firstName, lastName: lastName, email: email, password: password,spinner: spinner)
     }
     
     
-    ///register error alert
+    //Change profile pic
+    @objc private func didTapChangeProfilePic(){
+        presentPhotoActionSheet()
+    }
+
+    
+    
+    // MARK: - Alert function
     func alertUserLogInError(message:String){
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
         
         present(alert,animated: true)
     }
-    
-    
-    ///Change profile pic
-    @objc private func didTapChangeProfilePic(){
-        presentPhotoActionSheet()
-    }
 }
 
 
+// MARK: - TextField delegate
 extension RegisterViewController:UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == firstNameField{
@@ -253,11 +260,9 @@ extension RegisterViewController:UITextFieldDelegate{
         }
         return true
     }
-    
-    
-    
 }
 
+// MARK: - Image picker delegate
 
 extension RegisterViewController:UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
@@ -294,7 +299,6 @@ extension RegisterViewController:UIImagePickerControllerDelegate,UINavigationCon
     }
     
     
-    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true)
     }
@@ -310,6 +314,7 @@ extension RegisterViewController:UIImagePickerControllerDelegate,UINavigationCon
 }
 
 
+// MARK: - Register viewModel delegate
 extension RegisterViewController: RegisterViewModelDelegate {
     func registrationSuccess() {
         navigationController?.dismiss(animated: true)

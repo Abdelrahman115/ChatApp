@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		50DA13567F2DC9955E150D5F /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F286848147CB8D541804A51 /* Pods_ChatApp.framework */; };
 		BC354F2E2A6ED13D009DB080 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC354F2D2A6ED13D009DB080 /* GoogleService-Info.plist */; };
+		BC38B7B42A857F1800F0146F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = BC38B7B32A857F1800F0146F /* Realm */; };
+		BC38B7B62A857F1800F0146F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BC38B7B52A857F1800F0146F /* RealmSwift */; };
+		BC38B7B82A85850E00F0146F /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38B7B72A85850E00F0146F /* ChatViewController.swift */; };
+		BC38B7BA2A858AD700F0146F /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38B7B92A858AD700F0146F /* ConversationViewModel.swift */; };
+		BC38B7BC2A858BCA00F0146F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38B7BB2A858BCA00F0146F /* Message.swift */; };
+		BC38B7BE2A858C3100F0146F /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38B7BD2A858C3100F0146F /* Sender.swift */; };
 		BC78B3F92A840B24006956E6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC78B3F82A840B24006956E6 /* LoginViewModel.swift */; };
 		BC78B3FB2A84180D006956E6 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC78B3FA2A84180D006956E6 /* RegisterViewModel.swift */; };
-		BC8552622A7E9CC00017EDB4 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC8552612A7E9CC00017EDB4 /* LoginView.swift */; };
 		BC944B8E2A6EEBF400C168D5 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC944B8D2A6EEBF400C168D5 /* DatabaseManager.swift */; };
 		BC944B912A6EED9C00C168D5 /* chatAppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC944B902A6EED9C00C168D5 /* chatAppUser.swift */; };
 		BC9CD6702A6D6F9C00DC996B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9CD66F2A6D6F9C00DC996B /* AppDelegate.swift */; };
@@ -33,9 +38,12 @@
 		1F286848147CB8D541804A51 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		575406020CEA0A03C5AC342E /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
 		BC354F2D2A6ED13D009DB080 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BC38B7B72A85850E00F0146F /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		BC38B7B92A858AD700F0146F /* ConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
+		BC38B7BB2A858BCA00F0146F /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		BC38B7BD2A858C3100F0146F /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
 		BC78B3F82A840B24006956E6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BC78B3FA2A84180D006956E6 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
-		BC8552612A7E9CC00017EDB4 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BC944B8D2A6EEBF400C168D5 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		BC944B902A6EED9C00C168D5 /* chatAppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chatAppUser.swift; sourceTree = "<group>"; };
 		BC9CD66C2A6D6F9C00DC996B /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC38B7B62A857F1800F0146F /* RealmSwift in Frameworks */,
+				BC38B7B42A857F1800F0146F /* Realm in Frameworks */,
 				50DA13567F2DC9955E150D5F /* Pods_ChatApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +83,7 @@
 			children = (
 				BC78B3F82A840B24006956E6 /* LoginViewModel.swift */,
 				BC78B3FA2A84180D006956E6 /* RegisterViewModel.swift */,
+				BC38B7B92A858AD700F0146F /* ConversationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -113,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				BC9CD6732A6D6F9C00DC996B /* ConversationsViewController.swift */,
+				BC38B7B72A85850E00F0146F /* ChatViewController.swift */,
 				BC9CD6952A6D77D700DC996B /* Login  Register */,
 				BC9CD68D2A6D764300DC996B /* PhotoViewerViewController.swift */,
 				BC9CD68F2A6D765200DC996B /* VideoPlayerViewController.swift */,
@@ -127,7 +139,6 @@
 			children = (
 				BC9CD6882A6D747000DC996B /* StoryBoards */,
 				BC9CD6782A6D6F9E00DC996B /* Assets.xcassets */,
-				BC8552612A7E9CC00017EDB4 /* LoginView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -136,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				BC944B902A6EED9C00C168D5 /* chatAppUser.swift */,
+				BC38B7BB2A858BCA00F0146F /* Message.swift */,
+				BC38B7BD2A858C3100F0146F /* Sender.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,6 +217,10 @@
 			dependencies = (
 			);
 			name = ChatApp;
+			packageProductDependencies = (
+				BC38B7B32A857F1800F0146F /* Realm */,
+				BC38B7B52A857F1800F0146F /* RealmSwift */,
+			);
 			productName = ChatApp;
 			productReference = BC9CD66C2A6D6F9C00DC996B /* ChatApp.app */;
 			productType = "com.apple.product-type.application";
@@ -232,6 +249,9 @@
 				Base,
 			);
 			mainGroup = BC9CD6632A6D6F9C00DC996B;
+			packageReferences = (
+				BC38B7B22A857F1800F0146F /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = BC9CD66D2A6D6F9C00DC996B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -304,17 +324,20 @@
 			files = (
 				BC9CD68A2A6D761700DC996B /* LoginViewController.swift in Sources */,
 				BC78B3FB2A84180D006956E6 /* RegisterViewModel.swift in Sources */,
+				BC38B7B82A85850E00F0146F /* ChatViewController.swift in Sources */,
+				BC38B7BC2A858BCA00F0146F /* Message.swift in Sources */,
+				BC38B7BE2A858C3100F0146F /* Sender.swift in Sources */,
 				BC944B912A6EED9C00C168D5 /* chatAppUser.swift in Sources */,
 				BC944B8E2A6EEBF400C168D5 /* DatabaseManager.swift in Sources */,
 				BC9CD68C2A6D762600DC996B /* RegisterViewController.swift in Sources */,
 				BC9CD6922A6D766E00DC996B /* NewConversationViewController.swift in Sources */,
+				BC38B7BA2A858AD700F0146F /* ConversationViewModel.swift in Sources */,
 				BC9CD6742A6D6F9C00DC996B /* ConversationsViewController.swift in Sources */,
 				BC78B3F92A840B24006956E6 /* LoginViewModel.swift in Sources */,
 				BC9CD6902A6D765200DC996B /* VideoPlayerViewController.swift in Sources */,
 				BC9CD6972A6D7F6300DC996B /* Extensions.swift in Sources */,
 				BC9CD6702A6D6F9C00DC996B /* AppDelegate.swift in Sources */,
 				BC9CD6942A6D768400DC996B /* ProfileViewController.swift in Sources */,
-				BC8552622A7E9CC00017EDB4 /* LoginView.swift in Sources */,
 				BC9CD6722A6D6F9C00DC996B /* SceneDelegate.swift in Sources */,
 				BC9CD68E2A6D764300DC996B /* PhotoViewerViewController.swift in Sources */,
 			);
@@ -542,6 +565,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BC38B7B22A857F1800F0146F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC38B7B32A857F1800F0146F /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC38B7B22A857F1800F0146F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		BC38B7B52A857F1800F0146F /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC38B7B22A857F1800F0146F /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BC9CD6642A6D6F9C00DC996B /* Project object */;
 }

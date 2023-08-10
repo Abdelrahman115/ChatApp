@@ -10,6 +10,7 @@ import GoogleSignIn
 import FirebaseAuth
 import Firebase
 import FBSDKLoginKit
+import JGProgressHUD
 
 
 protocol LoginViewModelDelegate: AnyObject {
@@ -20,9 +21,13 @@ protocol LoginViewModelDelegate: AnyObject {
 class LoginViewModel {
     weak var delegate: LoginViewModelDelegate?
 
-    func loginUser(email: String, password: String) {
+    func loginUser(email: String, password: String,spinner:JGProgressHUD) {
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+            
             guard let self = self else { return }
+            DispatchQueue.main.async {
+                spinner.dismiss()
+            }
             if let error = error {
                 self.delegate?.loginFailure(error: error)
             } else {

@@ -10,13 +10,16 @@ import FirebaseAuth
 import FBSDKLoginKit
 import GoogleSignIn
 import Firebase
+import JGProgressHUD
 
 class LoginViewController: UIViewController{
     
     private var viewModel: LoginViewModel!
-    
+    private let spinner = JGProgressHUD(style: .light)
     
     // MARK: - UI elements
+    
+    
     private let scrollView:UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.clipsToBounds = true
@@ -189,6 +192,9 @@ class LoginViewController: UIViewController{
         fbLoggingButton.frame = CGRect(x: 20, y: orLabel.bottom + 20, width: scrollView.width - 40, height: 45)
         googleLogginButton.frame = CGRect(x: 20, y: fbLoggingButton.bottom + 20, width: scrollView.width - 40, height: 45)
         googleLogginButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 2, bottom: 10, right: googleLogginButton.width - 25)
+        
+        //logginButton.layer.cornerRadius = signUpButton.bounds.height / 2
+        
         let scrollViewHeight = imageView.height + emailField.height + password.height + logginButton.height + signUpButton.height + orLabel.height + fbLoggingButton.height + googleLogginButton.height + 100
         scrollView.contentSize = CGSize(width: view.width, height: scrollViewHeight)
     }
@@ -215,7 +221,8 @@ class LoginViewController: UIViewController{
             alertUserLogInError(message: "Please enter correct data")
             return
         }
-        viewModel.loginUser(email: email, password: password)
+        spinner.show(in: view)
+        viewModel.loginUser(email: email, password: password,spinner: spinner)
     }
     
     
