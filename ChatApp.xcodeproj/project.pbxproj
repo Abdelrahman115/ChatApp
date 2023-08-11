@@ -15,6 +15,8 @@
 		BC38B7BA2A858AD700F0146F /* ConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38B7B92A858AD700F0146F /* ConversationViewModel.swift */; };
 		BC38B7BC2A858BCA00F0146F /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38B7BB2A858BCA00F0146F /* Message.swift */; };
 		BC38B7BE2A858C3100F0146F /* Sender.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC38B7BD2A858C3100F0146F /* Sender.swift */; };
+		BC589BDE2A86A00400317AC9 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC589BDD2A86A00400317AC9 /* TabBarController.swift */; };
+		BC589BE02A86A5E700317AC9 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC589BDF2A86A5E700317AC9 /* StorageManager.swift */; };
 		BC78B3F92A840B24006956E6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC78B3F82A840B24006956E6 /* LoginViewModel.swift */; };
 		BC78B3FB2A84180D006956E6 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC78B3FA2A84180D006956E6 /* RegisterViewModel.swift */; };
 		BC944B8E2A6EEBF400C168D5 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC944B8D2A6EEBF400C168D5 /* DatabaseManager.swift */; };
@@ -42,6 +44,8 @@
 		BC38B7B92A858AD700F0146F /* ConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewModel.swift; sourceTree = "<group>"; };
 		BC38B7BB2A858BCA00F0146F /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		BC38B7BD2A858C3100F0146F /* Sender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sender.swift; sourceTree = "<group>"; };
+		BC589BDD2A86A00400317AC9 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		BC589BDF2A86A5E700317AC9 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		BC78B3F82A840B24006956E6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BC78B3FA2A84180D006956E6 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		BC944B8D2A6EEBF400C168D5 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				BC9CD68F2A6D765200DC996B /* VideoPlayerViewController.swift */,
 				BC9CD6912A6D766E00DC996B /* NewConversationViewController.swift */,
 				BC9CD6932A6D768400DC996B /* ProfileViewController.swift */,
+				BC589BDD2A86A00400317AC9 /* TabBarController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 				BC9CD6712A6D6F9C00DC996B /* SceneDelegate.swift */,
 				BC9CD6962A6D7F6300DC996B /* Extensions.swift */,
 				BC944B8D2A6EEBF400C168D5 /* DatabaseManager.swift */,
+				BC589BDF2A86A5E700317AC9 /* StorageManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -329,9 +335,11 @@
 				BC38B7BE2A858C3100F0146F /* Sender.swift in Sources */,
 				BC944B912A6EED9C00C168D5 /* chatAppUser.swift in Sources */,
 				BC944B8E2A6EEBF400C168D5 /* DatabaseManager.swift in Sources */,
+				BC589BE02A86A5E700317AC9 /* StorageManager.swift in Sources */,
 				BC9CD68C2A6D762600DC996B /* RegisterViewController.swift in Sources */,
 				BC9CD6922A6D766E00DC996B /* NewConversationViewController.swift in Sources */,
 				BC38B7BA2A858AD700F0146F /* ConversationViewModel.swift in Sources */,
+				BC589BDE2A86A00400317AC9 /* TabBarController.swift in Sources */,
 				BC9CD6742A6D6F9C00DC996B /* ConversationsViewController.swift in Sources */,
 				BC78B3F92A840B24006956E6 /* LoginViewModel.swift in Sources */,
 				BC9CD6902A6D765200DC996B /* VideoPlayerViewController.swift in Sources */,

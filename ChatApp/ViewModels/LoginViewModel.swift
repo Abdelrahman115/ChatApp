@@ -54,9 +54,13 @@ class LoginViewModel {
             else
             { return }
             
-        let firstName = user.profile?.givenName
-        let lastName = user.profile?.familyName
-        let email = user.profile?.email
+            guard let firstName = user.profile?.givenName,
+                  let lastName = user.profile?.familyName,
+                  let email = user.profile?.email,
+                  let hasImage = user.profile?.hasImage
+            else {return}
+        
+        
             
         let credential = GoogleAuthProvider.credential(
             withIDToken: idToken,
@@ -69,7 +73,29 @@ class LoginViewModel {
                 if let error = error {
                       self.delegate?.loginFailure(error: error)
                   } else {
-                      DatabaseManager.shared.insertUser(with: chatAppUser(firstName: firstName ?? "", lastName: lastName ?? "", emailAddress: email ?? ""))
+                      let chatUser = chatAppUser(firstName: firstName , lastName: lastName , emailAddress: email )
+                      DatabaseManager.shared.insertUser(with: chatUser) { success in
+                          if success{
+                              //Upload Image
+                              if hasImage{
+                                  guard let url = user.profile?.imageURL(withDimension: 200) else {return}
+                                  
+                                  URLSession.shared.dataTask(with: url) { data, _, error in
+                                      guard let data = data else {return}
+                                      
+                                      let fileName = chatUser.profilePictureFileName
+                                      StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) { result in
+                                          switch result{
+                                          case.success(let downloadURL):
+                                              UserDefaults.standard.setValue(downloadURL, forKey: "profile_Picture_url")
+                                          case.failure(let error):
+                                              print(error.localizedDescription)
+                                          }
+                                      }
+                                  }.resume()
+                              }
+                          }
+                      }
                       self.delegate?.loginSuccess()
                   }
               }
@@ -83,7 +109,7 @@ class LoginViewModel {
             print("User failed to login with facebook")
             return
         }
-        let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields":"email, name,id"], tokenString: token, version: nil, httpMethod: .get)
+        let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me", parameters: ["fields":"email, first_name, last_name, picture.type(large)"], tokenString: token, version: nil, httpMethod: .get)
         
         facebookRequest.start { _, result, error in
             guard let result = result as? [String: Any], error == nil else{
@@ -91,24 +117,59 @@ class LoginViewModel {
                 return
             }
             
-            guard let userName = result["name"] as? String, let email = result["email"] as? String else{
+            
+            
+            guard let firstName = result["first_name"] as? String,
+                  let lastName = result["last_name"] as? String ,
+                  let email = result["email"] as? String,
+                  let picture = result["picture"] as? [String:Any],
+                  let data = picture["data"] as? [String:Any],
+                  let pictureURL = data["url"] as? String
+            else{
                 print("failed to get email")
                 return
             }
-            let nameComponents = userName.components(separatedBy: " ")
-            guard nameComponents.count == 2 else{
-                return
-            }
-            let firstName = nameComponents[0]
-            let lastName = nameComponents[1]
             
-        
+            
+            
+            
+            
+            
             let credential = FacebookAuthProvider.credential(withAccessToken: token)
             FirebaseAuth.Auth.auth().signIn(with: credential) { [weak self] authResult, error in
                 if let error = error {
                     self?.delegate?.loginFailure(error: error)
                 } else {
-                    DatabaseManager.shared.insertUser(with: chatAppUser(firstName: firstName, lastName: lastName, emailAddress: email))
+                    let chatUser = chatAppUser(firstName: firstName , lastName: lastName , emailAddress: email )
+                    DatabaseManager.shared.insertUser(with: chatUser) { success in
+                        if success{
+                            guard let url = URL(string: pictureURL) else {return}
+                            
+                            print("Downloading data from facebook image")
+                            print(url)
+                            
+                            URLSession.shared.dataTask(with: url) { data, _, error in
+                                guard let data = data else {
+                                    print("Failed to get data from facebook")
+                                    return
+                                }
+                                //Upload Image
+                                
+                                print("got data from facebook uploading")
+                                
+                                let fileName = chatUser.profilePictureFileName
+                                StorageManager.shared.uploadProfilePicture(with: data, fileName: fileName) { result in
+                                    switch result{
+                                    case.success(let downloadURL):
+                                        UserDefaults.standard.setValue(downloadURL, forKey: "profile_Picture_url")
+                                    case.failure(let error):
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                            }.resume()
+                            
+                        }
+                    }
                     self?.delegate?.loginSuccess()
                 }
             }

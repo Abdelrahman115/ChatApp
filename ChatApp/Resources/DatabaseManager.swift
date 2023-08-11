@@ -18,7 +18,20 @@ final class DatabaseManager{
 // MARK: - Account management
 extension DatabaseManager{
     
-    public func ifUserEmailExists(with email:String,completion: @escaping((Bool)->Void)){
+    //inserts new user to database
+    public func insertUser(with user:chatAppUser, completion:@escaping (Bool) -> Void){
+        database.child(user.safeEmail).setValue(["firstName":user.firstName,"lastName":user.lastName]) { error, _ in
+            guard error == nil else {
+                print("failed to write to data base")
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+    }
+    
+    
+    /*public func ifUserEmailExists(with email:String,completion: @escaping((Bool)->Void)){
         var safeEmail = email.replacingOccurrences(of: ".", with: "-")
         safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
         
@@ -46,14 +59,5 @@ extension DatabaseManager{
                                 }
 
                             })
-    }
-    
-    
-    
-    ///inserts new user to database
-    public func insertUser(with user:chatAppUser){
-        database.child(user.safeEmail).setValue(["firstName":user.firstName,
-                                                   "lastName":user.lastName
-                                                  ])
-    }
+    }*/
 }

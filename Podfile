@@ -13,10 +13,12 @@ source 'https://github.com/CocoaPods/Specs.git'
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
+pod 'Firebase/Storage'
 pod 'GoogleSignIn'
 pod 'MessageKit'
 pod 'JGProgressHUD'
 pod 'SDWebImage'
+pod 'Kingfisher'
 
 
 pod 'FBSDKLoginKit'

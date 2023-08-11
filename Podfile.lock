@@ -24,6 +24,9 @@ PODS:
   - Firebase/Database (10.12.0):
     - Firebase/CoreOnly
     - FirebaseDatabase (~> 10.12.0)
+  - Firebase/Storage (10.12.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 10.12.0)
   - FirebaseAnalytics (10.12.0):
     - FirebaseAnalytics/AdIdSupport (= 10.12.0)
     - FirebaseCore (~> 10.0)
@@ -49,10 +52,13 @@ PODS:
     - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
     - GoogleUtilities/Environment (~> 7.8)
     - GTMSessionFetcher/Core (< 4.0, >= 2.1)
+  - FirebaseAuthInterop (10.12.0)
   - FirebaseCore (10.12.0):
     - FirebaseCoreInternal (~> 10.0)
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/Logger (~> 7.8)
+  - FirebaseCoreExtension (10.12.0):
+    - FirebaseCore (~> 10.0)
   - FirebaseCoreInternal (10.12.0):
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
   - FirebaseDatabase (10.12.0):
@@ -63,6 +69,12 @@ PODS:
     - GoogleUtilities/Environment (~> 7.8)
     - GoogleUtilities/UserDefaults (~> 7.8)
     - PromisesObjC (~> 2.1)
+  - FirebaseStorage (10.12.0):
+    - FirebaseAppCheckInterop (~> 10.0)
+    - FirebaseAuthInterop (~> 10.0)
+    - FirebaseCore (~> 10.0)
+    - FirebaseCoreExtension (~> 10.0)
+    - GTMSessionFetcher/Core (< 4.0, >= 2.1)
   - GoogleAppMeasurement (10.12.0):
     - GoogleAppMeasurement/AdIdSupport (= 10.12.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.11)
@@ -114,6 +126,7 @@ PODS:
     - InputBarAccessoryView/Core (= 5.5.0)
   - InputBarAccessoryView/Core (5.5.0)
   - JGProgressHUD (2.2)
+  - Kingfisher (7.9.0)
   - leveldb-library (1.22.2)
   - MessageKit (3.8.0):
     - InputBarAccessoryView (~> 5.5.0)
@@ -132,8 +145,10 @@ DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
+  - Firebase/Storage
   - GoogleSignIn
   - JGProgressHUD
+  - Kingfisher
   - MessageKit
   - SDWebImage
 
@@ -148,10 +163,13 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
     - FirebaseAuth
+    - FirebaseAuthInterop
     - FirebaseCore
+    - FirebaseCoreExtension
     - FirebaseCoreInternal
     - FirebaseDatabase
     - FirebaseInstallations
+    - FirebaseStorage
     - GoogleAppMeasurement
     - GoogleSignIn
     - GoogleUtilities
@@ -159,6 +177,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - InputBarAccessoryView
     - JGProgressHUD
+    - Kingfisher
     - leveldb-library
     - MessageKit
     - nanopb
@@ -175,10 +194,13 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 0270389efbe3022b54ec4588862dabec3477ee98
   FirebaseAppCheckInterop: f95a4feb9089867aff1a4bdc2ce309137e07736a
   FirebaseAuth: a66c1e14ec58f41d154a4b41ce1a23ea00ad4805
+  FirebaseAuthInterop: 047153f3c2928822032190aa5194e332670a0d66
   FirebaseCore: f86a1394906b97ac445ae49c92552a9425831bed
+  FirebaseCoreExtension: 0ce5ac36042001cfa233ce7bfa28e5c313cf80f4
   FirebaseCoreInternal: 950500ad8a08963657f6d8c67b579740c06d6aa1
   FirebaseDatabase: 6d998d7ef2c1723b3e798a85e61a7dc0504b1ea0
   FirebaseInstallations: 7b99ef103f013624444c614397038219c45f8e63
+  FirebaseStorage: 1d7ca8c8953fc61ccacaa7c612696b5402968a0d
   GoogleAppMeasurement: 2d800fab85e7848b1e66a6f8ce5bca06c5aad892
   GoogleSignIn: b232380cf495a429b8095d3178a8d5855b42e842
   GoogleUtilities: c63691989bf362ba0505507da00eeb326192e83e
@@ -186,12 +208,13 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: e8647203b65cee28c5f73d0f473d096653945e72
   InputBarAccessoryView: 1d7b0a672b36e370f01f264b3907ef39d03328e3
   JGProgressHUD: d83d7a981b85d11205e19ff8ad5bb9c40571c847
+  Kingfisher: 59f908b6d2f403b0a3e539debb0eec05cb27002c
   leveldb-library: f03246171cce0484482ec291f88b6d563699ee06
   MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   SDWebImage: 750adf017a315a280c60fde706ab1e552a3ae4e9
 
-PODFILE CHECKSUM: 90afa6b8f87cb1c65aca16f1508ae69b129b8c9d
+PODFILE CHECKSUM: a24d7c5ea711727b9f8a006fa8d7d3bcf3e0ba36
 
 COCOAPODS: 1.12.1

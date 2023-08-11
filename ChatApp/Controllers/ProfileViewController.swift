@@ -64,6 +64,7 @@ extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{
             do{
                 try FirebaseAuth.Auth.auth().signOut()
                 
+                //self.navigationController?.popToRootViewController(animated: true)
                 let vc = LoginViewController()
                 let nav = UINavigationController(rootViewController: vc)
                 nav.modalPresentationStyle = .fullScreen

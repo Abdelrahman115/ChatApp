@@ -28,7 +28,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="O4x-cF-o8V">
             <objects>
-                <tabBarController id="m8N-Ge-VRA" sceneMemberID="viewController">
+                <tabBarController id="m8N-Ge-VRA" customClass="TabBarController" customModule="ChatApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JUg-7X-8u4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

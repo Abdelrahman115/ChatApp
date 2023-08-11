@@ -223,7 +223,7 @@ class RegisterViewController: UIViewController {
             return
         }
         spinner.show(in: view)
-        viewModel.registerUser(firstName: firstName, lastName: lastName, email: email, password: password,spinner: spinner)
+        viewModel.registerUser(firstName: firstName, lastName: lastName, email: email, password: password,spinner: spinner,imageView: imageView)
     }
     
     
