@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 import JGProgressHUD
 
 class RegisterViewController: UIViewController {
@@ -215,11 +214,11 @@ class RegisterViewController: UIViewController {
               !email.isEmpty,
               !password.isEmpty
             else {
-            alertUserLogInError(message: "Please fill all data")
+            viewModel.alertUserLogInError(message: "Please fill all data",view: self)
             return
         }
         guard passwordConfirm == password else {
-            alertUserLogInError(message: "Please enter your password again in password confirm field.")
+            viewModel.alertUserLogInError(message: "Please enter your password again in password confirm field.",view: self)
             return
         }
         spinner.show(in: view)
@@ -230,16 +229,6 @@ class RegisterViewController: UIViewController {
     //Change profile pic
     @objc private func didTapChangeProfilePic(){
         presentPhotoActionSheet()
-    }
-
-    
-    
-    // MARK: - Alert function
-    func alertUserLogInError(message:String){
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-        
-        present(alert,animated: true)
     }
 }
 
@@ -322,6 +311,6 @@ extension RegisterViewController: RegisterViewModelDelegate {
 
     func registrationFailure(error: Error) {
         let errorMessage = "An error occurred during registration: \(error.localizedDescription)"
-        alertUserLogInError(message: errorMessage)
+        viewModel.alertUserLogInError(message: errorMessage,view: self)
     }
 }

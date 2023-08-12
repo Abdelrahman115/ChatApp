@@ -14,6 +14,11 @@ final class DatabaseManager{
     
     private let database = Database.database().reference()
     
+    static func safeEmail(email:String) -> String{
+            var safeEmail = email.replacingOccurrences(of: ".", with: "-")
+            safeEmail = safeEmail.replacingOccurrences(of: "@", with: "-")
+            return safeEmail
+    }
 }
 // MARK: - Account management
 extension DatabaseManager{

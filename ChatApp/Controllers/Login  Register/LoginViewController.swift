@@ -6,10 +6,7 @@
 //
 
 import UIKit
-import FirebaseAuth
 import FBSDKLoginKit
-import GoogleSignIn
-import Firebase
 import JGProgressHUD
 
 class LoginViewController: UIViewController{
@@ -28,7 +25,7 @@ class LoginViewController: UIViewController{
     
     private let imageView:UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo")
+        imageView.image = UIImage(named: "logo3")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -65,7 +62,7 @@ class LoginViewController: UIViewController{
     private let logginButton:UIButton = {
         let button = UIButton()
         button.setTitle("Sign In", for: .normal)
-        button.backgroundColor = .blue
+        button.backgroundColor = .link
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 5
         button.layer.masksToBounds = true
@@ -84,7 +81,7 @@ class LoginViewController: UIViewController{
     private let signUpButton:UIButton = {
         let button = UIButton()
         button.setTitle("Sign up", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(.link, for: .normal)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = .systemFont(ofSize: 20, weight: .bold)
         return button
@@ -218,7 +215,7 @@ class LoginViewController: UIViewController{
         emailField.resignFirstResponder()
         password.resignFirstResponder()
         guard let email = emailField.text, let password = password.text, !email.isEmpty, !password.isEmpty, password.count >= 6,email.contains("@") else {
-            alertUserLogInError(message: "Please enter correct data")
+            viewModel.alertUserLogInError(message: "Please enter correct data",view: self)
             return
         }
         spinner.show(in: view)
@@ -238,14 +235,6 @@ class LoginViewController: UIViewController{
             return
         }
         viewModel.logInUsingGoogle(email: email, password: password, Presenting: self)
-    }
-    
-    // MARK: - Alert function
-    func alertUserLogInError(message:String){
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
-        
-        present(alert,animated: true)
     }
 }
 
@@ -286,7 +275,7 @@ extension LoginViewController: LoginViewModelDelegate {
 
     func loginFailure(error: Error) {
         let errorMessage = "An error occurred: \(error.localizedDescription)"
-        alertUserLogInError(message: errorMessage)
+        viewModel.alertUserLogInError(message: errorMessage,view: self)
     }
 }
 

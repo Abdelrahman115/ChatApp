@@ -47,4 +47,17 @@ class RegisterViewModel {
             }
         }
     }
+    
+    
+    func alertUserLogInError(message:String,view:UIViewController){
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        
+        view.present(alert,animated: true)
+    }
+}
+
+
+extension RegisterViewModel{
+    
 }

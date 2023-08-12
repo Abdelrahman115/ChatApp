@@ -31,6 +31,7 @@ class LoginViewModel {
             if let error = error {
                 self.delegate?.loginFailure(error: error)
             } else {
+                UserDefaults.standard.set(email, forKey: "email")
                 self.delegate?.loginSuccess()
             }
         }
@@ -96,6 +97,7 @@ class LoginViewModel {
                               }
                           }
                       }
+                      UserDefaults.standard.set(email, forKey: "email")
                       self.delegate?.loginSuccess()
                   }
               }
@@ -170,12 +172,21 @@ class LoginViewModel {
                             
                         }
                     }
+                    UserDefaults.standard.set(email, forKey: "email")
                     self?.delegate?.loginSuccess()
                 }
             }
         }
         
         
+    }
+    
+    
+    func alertUserLogInError(message:String,view:UIViewController){
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        
+        view.present(alert,animated: true)
     }
     
 }

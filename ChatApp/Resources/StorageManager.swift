@@ -49,6 +49,20 @@ extension StorageManager{
     }
     
     
+    public func downloadURL(for path:String,completion:@escaping(Result<String,Error>) -> Void){
+        let reference = storage.child(path)
+        reference.downloadURL { url, error in
+            guard let url = url, error == nil else {
+                completion(.failure(StroageErrors.failedToGetDownloadURL))
+                
+                return
+            }
+            let urlString = url.absoluteString
+            completion(.success(urlString))
+        }
+    }
+    
+    
     
    
     
