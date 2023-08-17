@@ -21,8 +21,8 @@ class ProfileViewController: UIViewController {
         viewModel = ProfileViewModel()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         tableView.tableHeaderView = ProfileHeaderView()
     }
     
@@ -36,6 +36,9 @@ class ProfileViewController: UIViewController {
     
     
 }
+
+
+
 
 extension ProfileViewController:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
